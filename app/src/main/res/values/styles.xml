@@ -24,6 +24,7 @@
 
     <!--  Splash theme  -->
     <style name="SplashTheme" parent="NoActionBarTheme">
+        <item name="windowNoTitle">true</item>
         <item name="android:windowBackground">@drawable/background_splash</item>
     </style>
 
