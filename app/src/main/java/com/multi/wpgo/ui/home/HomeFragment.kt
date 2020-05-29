@@ -1,13 +1,16 @@
 package com.multi.wpgo.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.multi.wpgo.R
+import com.multi.wpgo.data.Pharmacies
 import kotlinx.android.synthetic.main.fragment_home.*
+import java.io.Serializable
 
 
 class HomeFragment : Fragment(){
@@ -25,8 +28,10 @@ class HomeFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 //        super.onViewCreated(view, savedInstanceState)
+
         pagerAdapter = PagerAdapter(childFragmentManager)
         viewPager = view.findViewById(R.id.pager)
         viewPager.adapter = pagerAdapter
     }
+
 }

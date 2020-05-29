@@ -3,9 +3,18 @@ package com.multi.wpgo
 import android.Manifest
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.example.kotlindemos.OnMapAndViewReadyListener
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
+import com.multi.wpgo.data.Pharmacy
+import com.multi.wpgo.data.PharmacyRepository
+import kotlinx.coroutines.*
+import java.io.Serializable
+import java.lang.Exception
 
 class SplashActivity : AppCompatActivity() {
 
@@ -14,8 +23,10 @@ class SplashActivity : AppCompatActivity() {
         showPermissionDialog()
     }
 
-    fun startMainActivity() {
-        startActivity(Intent(this, MainActivity::class.java))
+    private fun startMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+//        intent.putExtra("mapData", pharmacies as Serializable)
+        startActivity(intent)
         finish()
     }
 
