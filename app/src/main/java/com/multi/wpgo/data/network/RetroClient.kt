@@ -1,6 +1,8 @@
 package com.multi.wpgo.data.network
 
 import android.util.Log
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -10,17 +12,26 @@ import java.util.concurrent.TimeUnit
 
 object RetroClient {
 
-    private const val TIMEOUT = 10L
+    private const val TIMEOUT = 5L
 
-    private val interceptor = run {
-        val httpLoggingInterceptor = HttpLoggingInterceptor()
-        httpLoggingInterceptor.apply {
-            httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-        }
+    private val interceptor = Interceptor { chain ->
+        val newUrl = chain.request().url
+            .newBuilder()
+            .build()
+
+        val newRequest = chain.request()
+            .newBuilder()
+            .url(newUrl)
+            .build()
+
+        chain.proceed(newRequest)
+//        val httpLoggingInterceptor = HttpLoggingInterceptor()
+//        httpLoggingInterceptor.apply {
+//            httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+//        }
     }
 
-    private var client = OkHttpClient.Builder()
-        .retryOnConnectionFailure(true)
+    private val client = OkHttpClient().newBuilder()
         .addInterceptor(interceptor)
         .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
         .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
@@ -32,6 +43,7 @@ object RetroClient {
             .client(client)
             .baseUrl("http://220.69.241.86/wpgo/index.php/") // 도메인 주소
             .addConverterFactory(GsonConverterFactory.create()) // GSON을 사용하기 위해 ConverterFactory에 GSON 지정
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build().create(RetrofitService::class.java)
     }
 

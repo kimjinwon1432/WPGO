@@ -12,5 +12,6 @@ data class Pharmacy (
     var opWeekday: String = "",
     var opSat: String = "",
     var opSun: String = "",
-    var opHoliday: String = ""
+    var opHoliday: String = "",
+    var isOpNow: Boolean = false
 ) : Serializable

@@ -4,8 +4,10 @@
 
     <item
         android:drawable="@color/colorPrimary"/>
-    <item
-        android:gravity="center"
-        android:drawable="@drawable/logo">
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:tint="@color/white"
+            android:src="@drawable/logo"/>
     </item>
 </layer-list>
