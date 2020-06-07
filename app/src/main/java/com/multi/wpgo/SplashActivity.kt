@@ -23,6 +23,8 @@ class SplashActivity : AppCompatActivity() {
         showPermissionDialog()
     }
 
+
+
     private fun startMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
 //        intent.putExtra("mapData", pharmacies as Serializable)
